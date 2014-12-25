@@ -1,6 +1,6 @@
 html
   head
-    title="#{target}, you're the best"
+    title="#{target}, you're the best#{extra.empty? ? '' : " (#{extra})"}"
     link rel="stylesheet" href="/css/general.css"
   body
     ==yield
