@@ -10,7 +10,7 @@ class YoureTheBest < Sinatra::Base
   end
 
   get "/*" do
-    lookup = request.host.split(".")[0..-3].join(".")
+    lookup = request.host.split(".yourethe.best").first
     hit = settings.map[lookup]
     redirect("http://you.yourethe.best/") if hit.nil?
     uri = URI([*hit].sample)
