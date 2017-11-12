@@ -12,12 +12,14 @@ class YoureTheBest < Sinatra::Base
   get "/*" do
     lookup, host = request.host.split(".yourethebest")
     hit = settings.map[lookup]
-    redirect("http://you.yourethebest#{host}/") if hit.nil?
+    redirect('http://who-is-awesome.com/') if hit.nil?
     uri = URI([*hit].sample)
     extra = params[:splat].first.tr('/', ' ')
 
-    view = uri.scheme == "view" ? uri.host.to_sym : :photo
-
-    slim view, locals: { target: lookup.gsub(/\W+/, " ").titlecase, uri: uri, extra: extra}
+    slim :photo, locals: {
+      target: lookup.gsub(/\W+/, " ").titlecase,
+      uri: uri,
+      extra: extra
+    }
   end
 end
